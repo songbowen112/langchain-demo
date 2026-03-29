@@ -1,22 +1,12 @@
-# 这是一个示例 Python 脚本。
-import sys
+import dotenv
+from langchain_ollama import ChatOllama
+from langchain_core.tools import create_retriever_tool
+from langchain_classic.agents import create_tool_calling_agent
 
-import langchain
+dotenv.load_dotenv()
 
+llm = ChatOllama(base_url="http://localhost:11434", model="qwen3.5:2b", reasoning=False)
 
-# 按 ⌃R 执行或将其替换为您的代码。
-# 按 双击 ⇧ 在所有地方搜索类、文件、工具窗口、操作和设置。
-
-
-def print_hi(name):
-    # 在下面的代码行中使用断点来调试脚本。
-    print(f'Hi, {name}')  # 按 ⌘F8 切换断点。
-    print(sys.version)  # 按 ⌘F8 切换断点。
-    print(langchain.__version__)  # 按 ⌘F8 切换断点。
-
-
-# 按装订区域中的绿色按钮以运行脚本。
-if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# 访问 https://www.jetbrains.com/help/pycharm/ 获取 PyCharm 帮助
+if __name__ == "__main__":
+    response = llm.invoke("什么是LangChain?")
+    print(response)
